@@ -15,6 +15,10 @@
   transform: translateX(-6rem);
 }
 
+div.testnetHeadeColor {
+  background-color: var(--color-blue-stone);
+}
+
 /* SMALL */
 @media screen and (max-width: 768px) {
   .customHeader {

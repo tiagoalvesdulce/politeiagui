@@ -6,6 +6,7 @@ import HamburgerMenu from "src/components/HamburgerMenu";
 import HeaderNav from "src/components/HeaderNav";
 import NavigationDrawer from "src/components/NavigationDrawer";
 import { useConfig } from "src/containers/Config";
+import useNetwork from "src/hooks/api/useNetwork";
 import { NOJS_ROUTE_PREFIX } from "src/constants";
 import styles from "./Header.module.css";
 
@@ -13,6 +14,8 @@ const Header = ({ noBorder }) => {
   const small = useMediaQuery("(max-width: 1000px)");
   const extrasmall = useMediaQuery("(max-width: 560px)");
   const [showMenu, setShowMenu] = useState(false);
+  const { isTestnet } = useNetwork();
+  console.log(isTestnet);
   const { javascriptEnabled } = useConfig();
   const url = javascriptEnabled ? "/" : NOJS_ROUTE_PREFIX + "/";
   const toggleShowMenu = useCallback(() => setShowMenu(!showMenu), [
@@ -20,7 +23,11 @@ const Header = ({ noBorder }) => {
     setShowMenu
   ]);
   return (
-    <UIHeader className={classNames(noBorder && styles.noBorder)}>
+    <UIHeader
+      className={classNames(
+        noBorder && styles.noBorder,
+        isTestnet && styles.testnetHeadeColor
+      )}>
       <NavLink
         to={url}
         className={extrasmall && showMenu ? styles.hideLogo : styles.showLogo}>
