@@ -20,6 +20,7 @@ import flow from "lodash/fp/flow";
 import isEmpty from "lodash/fp/isEmpty";
 import keys from "lodash/fp/keys";
 import difference from "lodash/fp/difference";
+import { shortRecordToken } from "src/helpers";
 import {
   PROPOSAL_STATE_VETTED,
   PROPOSAL_STATE_UNVETTED,
@@ -50,8 +51,7 @@ const getRfpSubmissions = (proposals) =>
 
 const getUnfetchedTokens = (proposals, tokens) =>
   difference(
-    tokens.map((token) => token.substring(0, 7))
-    // tokens
+    tokens.map((token) => shortRecordToken(token))
   )(keys(proposals));
 
 const getCurrentPage = (tokens) => {
